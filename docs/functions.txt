@@ -1,0 +1,41 @@
+# Funções do Backend:
+
+
+Salvar usuário com as seguintes informações:
+  {
+    id,
+    name,
+    email,
+    password,
+    followers,
+    following,
+    views,      Número de visualizações total
+    hearts,     Número de corações total
+    description,
+    picture,
+    verified,
+    verifier_token,
+    created_at,
+    updated_at,
+  }
+
+Salvar artigos com as seguintes informações:
+  {
+    id,
+    title,
+    content,
+    description,
+    author_id,
+    views,       Id de quem visualizou
+    hearts,      Id de quem deu coração
+    created_at,
+    updated_at,
+  }
+
+Verificar email do usuário com nodemailer
+
+Autenticar usuário e dar permissões para usuários gerenciadores e para administradores
+
+# Funções do Front:
+
+To do
