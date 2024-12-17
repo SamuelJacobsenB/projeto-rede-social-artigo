@@ -13,8 +13,9 @@ Salvar usuário com as seguintes informações:
     hearts,     Número de corações total
     description,
     picture,
+    role,
     verified,
-    verifier_token,
+    token_verifier,
     created_at,
     updated_at,
   }
@@ -28,6 +29,7 @@ Salvar artigos com as seguintes informações:
     author_id,
     views,       Id de quem visualizou
     hearts,      Id de quem deu coração
+    comments,
     created_at,
     updated_at,
   }
