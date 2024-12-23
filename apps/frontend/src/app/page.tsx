@@ -1,10 +1,11 @@
-import { Logo } from "@/components";
+import { Navbar } from "@/components";
 import React from "react";
 
 const Home = () => {
   return (
     <div>
-      <Logo />
+      <Navbar />
+      <h1>hello</h1>
     </div>
   );
 };
