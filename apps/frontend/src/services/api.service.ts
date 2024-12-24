@@ -1,7 +1,8 @@
 import axios from "axios";
+import { config } from "@/config";
 
 const api = axios.create({
-  baseURL: process.env.BACK_URL,
+  baseURL: config.BACK_URL,
 });
 
 export { api };

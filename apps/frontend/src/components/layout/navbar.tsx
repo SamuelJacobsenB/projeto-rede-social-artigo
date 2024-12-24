@@ -32,7 +32,6 @@ const Navbar = () => {
       <div className="fixed bottom-0 bg-primary w-screen h-16 md:hidden">
         <Links />
       </div>
-      <div className="absolute w-full bottom-0 h-16" />
     </>
   );
 };
