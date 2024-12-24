@@ -48,6 +48,8 @@ const Login = () => {
           value={email}
           setValue={setEmail}
           label="Email"
+          placeholder="Seu email"
+          required
         />
         <Input
           id="password"
@@ -55,6 +57,10 @@ const Login = () => {
           value={password}
           setValue={setPassword}
           label="Senha"
+          placeholder="Sua senha"
+          minLength={8}
+          maxLength={15}
+          required
         />
         <Button className="bg-primary text-white hover:bg-dark-primary">
           Enviar
