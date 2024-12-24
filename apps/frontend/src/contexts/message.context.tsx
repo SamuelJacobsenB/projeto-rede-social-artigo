@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useCallback, createContext, useContext } from "react";
 import { Type } from "@/types";
 

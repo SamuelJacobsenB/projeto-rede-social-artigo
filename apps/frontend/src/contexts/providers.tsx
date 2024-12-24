@@ -1,7 +1,14 @@
 "use client";
 
-const Providers = () => {
-  return <div>Providers</div>;
+import React from "react";
+import { MessageProvider } from ".";
+
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      <MessageProvider>{children}</MessageProvider>
+    </>
+  );
 };
 
-export default Providers;
+export { Providers };
