@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Logo, Links, I } from "..";
+import { Logo, Links, NavProfile } from "..";
 
 const Navbar = () => {
   return (
@@ -7,25 +6,11 @@ const Navbar = () => {
       <div className="w-full h-20" />
       <div className="top-0 fixed flex items-center justify-between w-screen h-20 bg-primary">
         <Logo />
-        <div className="flex items-center justify-end gap-4 w-full h-full">
+        <div className="flex items-center justify-end gap-4 h-full">
           <div className="hidden w-full max-w-xl h-full md:flex">
             <Links />
           </div>
-          <div>
-            <div className="flex items-center gap-2 p-2 text-white text-md font-semibold">
-              <Link href={"/register"} className="hover:underline">
-                Cadastro
-              </Link>
-              <div className="text-white text-2xl select-none">|</div>
-              <Link
-                href={"/login"}
-                className="flex items-center gap-2 hover:underline"
-              >
-                <I.UserCircle className="text-2xl" />
-                Login
-              </Link>
-            </div>
-          </div>
+          <NavProfile />
         </div>
       </div>
 

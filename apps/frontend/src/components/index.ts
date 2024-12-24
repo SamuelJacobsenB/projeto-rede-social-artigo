@@ -3,6 +3,7 @@ export * from "./layout/logo";
 export * from "./layout/navbar";
 export * from "./layout/links";
 export * from "./layout/formarea";
+export * from "./layout/navprofile";
 
 // Shared
 export * from "./shared/button";
