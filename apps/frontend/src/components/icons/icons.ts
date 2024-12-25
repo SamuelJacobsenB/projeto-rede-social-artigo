@@ -17,6 +17,7 @@ import {
   FaItalic,
   FaLink,
 } from "react-icons/fa";
+import { LuLoaderCircle } from "react-icons/lu";
 
 const I = {
   Add: IoAdd,
@@ -31,6 +32,7 @@ const I = {
   Link: FaLink,
   Paragraph: FaParagraph,
   Search: IoSearch,
+  Spinner: LuLoaderCircle,
   Underline: FaUnderline,
   UserCircle: FaUserCircle,
   Warning: IoWarning,

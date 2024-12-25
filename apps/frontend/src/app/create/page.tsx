@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { useMessage } from "@/contexts";
 import Image from "next/image";
 import { controller } from "@/services";
-import { Button, Input, Formarea, Form, Editor } from "@/components";
+import { Button, Input, Formarea, Form, TextEditor } from "@/components";
+import { EditorState } from "draft-js";
 
 const Create = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const Create = () => {
 
   const [formError, setFormError] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(EditorState.createEmpty());
 
   const onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -35,7 +36,7 @@ const Create = () => {
   return (
     <Formarea>
       <Image src={"/imgs/logo_black.png"} alt="Logo" width={300} height={150} />
-      <h1 className="text-4xl text-center font-bold">Login</h1>
+      <h1 className="text-4xl text-center font-bold">Cadastrar artigo</h1>
       <Form
         formError={formError}
         setFormError={setFormError}
@@ -50,9 +51,9 @@ const Create = () => {
           placeholder="Título do artigo"
           required
         />
-        <Editor
-          id="content"
+        <TextEditor
           label="Conteúdo"
+          id="content"
           value={content}
           setValue={setContent}
         />
