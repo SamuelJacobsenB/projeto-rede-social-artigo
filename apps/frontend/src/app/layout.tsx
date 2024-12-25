@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Message />
-          <main>{children}</main>
+          <main className="w-full h-full">{children}</main>
         </Providers>
       </body>
     </html>

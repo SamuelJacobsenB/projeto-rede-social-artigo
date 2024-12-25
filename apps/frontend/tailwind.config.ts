@@ -14,6 +14,9 @@ export default {
           primary: "#552a5b",
         },
       },
+      width: {
+        "10/21": "47%",
+      },
     },
   },
   plugins: [],

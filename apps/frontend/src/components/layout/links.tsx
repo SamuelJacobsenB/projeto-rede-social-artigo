@@ -14,7 +14,7 @@ const Links = () => {
   }, []);
 
   return (
-    <ul className="flex items-center justify-around text-white text-3xl w-full h-full border-2 border-primary">
+    <ul className="flex items-center justify-around text-white text-3xl min-w-96 w-full h-full border-2 border-primary">
       {links.map(({ href, label, icon }, i: number) => {
         const Icon = icon;
 

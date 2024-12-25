@@ -7,7 +7,6 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import Cookies from "js-cookie";
 import { controller } from "@/services";
 import { User } from "@/types";
 
@@ -22,7 +21,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const findUser = useCallback(async () => {
-    const access_token = Cookies.get("access_token");
+    const access_token = localStorage.getItem("access_token");
 
     if (access_token) {
       const { data, error } = await controller.get(
@@ -31,7 +30,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       );
 
       if (error) {
-        Cookies.remove("access_token");
+        localStorage.removeItem("access_token");
         setUser(null);
         return;
       }

@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useMessage } from "@/contexts";
+import { useMessage, useUser } from "@/contexts";
 import Image from "next/image";
 import Link from "next/link";
-import Cookies from "js-cookie";
 import { controller } from "@/services";
 import { Button, Input, Formarea, Form } from "@/components";
 
 const Login = () => {
   const router = useRouter();
   const { showMessage } = useMessage();
+  const { findUser } = useUser();
 
   const [formError, setFormError] = useState("");
   const [email, setEmail] = useState("");
@@ -30,8 +30,9 @@ const Login = () => {
       return;
     }
 
-    Cookies.set("access_token", data.access_token);
+    localStorage.setItem("access_token", data.access_token);
     showMessage("Login realizado com sucesso!", "success");
+    await findUser();
     router.push("/");
   };
 

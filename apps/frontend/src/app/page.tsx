@@ -1,12 +1,18 @@
-import { Navbar } from "@/components";
-import React from "react";
+import { Layout } from "@/components";
 
 const Home = () => {
   return (
-    <>
-      <Navbar />
+    <Layout>
       <h1 className="text-8xl">hello</h1>
-    </>
+      <h1 className="text-8xl">hello</h1>
+      <h1 className="text-8xl">hello</h1>
+      <h1 className="text-8xl">hello</h1>
+      <h1 className="text-8xl">hello</h1>
+      <h1 className="text-8xl">hello</h1>
+      <h1 className="text-8xl">hello</h1>
+      <h1 className="text-8xl">hello</h1>
+      <h1 className="text-8xl">hello</h1>
+    </Layout>
   );
 };
 
