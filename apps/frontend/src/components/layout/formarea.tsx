@@ -9,8 +9,8 @@ interface FormareaProps {
 const Formarea = ({ children }: FormareaProps) => {
   return (
     <div className="flex items-center justify-center min-w-screen w-full min-h-screen h-full bg-primary p-4 py-20">
-      <div className="fixed top-4 left-4 flex items-center justify-center bg-white text-black text-3xl w-12 h-12 rounded shadow">
-        <Link href={"/"}>
+      <div className="fixed top-4 left-4 flex items-center justify-center bg-white text-3xl w-12 h-12 rounded shadow">
+        <Link href={"/"} className="text-black">
           <I.Home />
         </Link>
       </div>

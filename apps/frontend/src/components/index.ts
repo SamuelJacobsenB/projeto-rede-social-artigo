@@ -12,6 +12,8 @@ export * from "./shared/input";
 export * from "./shared/fileinput";
 export * from "./shared/form";
 export * from "./shared/message";
+export * from "./shared/editor";
+export * from "./shared/editorbutton";
 
 // Icons
 export * from "./icons/icons";

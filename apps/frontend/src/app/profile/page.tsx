@@ -4,8 +4,7 @@ import { useUser } from "@/contexts";
 import Image from "next/image";
 import { Layout, I, Button } from "@/components";
 
-const infoBtnStyle =
-  "bg-primary w-10/21 hover:bg-dark-primary select-none md:w-full";
+const infoBtnStyle = "bg-primary hover:bg-dark-primary select-none";
 
 const Profile = () => {
   const { user } = useUser();

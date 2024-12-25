@@ -26,7 +26,7 @@ const Links = () => {
           >
             <Link
               href={href}
-              className={`flex items-center justify-center flex-1 h-full ${
+              className={`flex items-center justify-center flex-1 h-full text-white ${
                 href == path ? "bg-dark-primary" : ""
               }`}
             >
