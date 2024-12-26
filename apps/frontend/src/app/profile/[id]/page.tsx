@@ -1,16 +1,33 @@
 "use client";
 
-import { useUser } from "@/contexts";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { Layout, I, Button } from "@/components";
+import { useOneUser } from "@/hooks";
+import { Layout, I, Button, LoadingPage } from "@/components";
+import { useMessage } from "@/contexts";
+import { useEffect } from "react";
 
 const infoBtnStyle = "bg-primary hover:bg-dark-primary select-none";
 
 const Profile = () => {
-  const { user } = useUser();
+  const router = useRouter();
+  const { id } = useParams();
+  const { user, loading, error } = useOneUser(id as string);
+  const { showMessage } = useMessage();
+
+  useEffect(() => {
+    if (error) {
+      showMessage(error as string, "error");
+      router.push("/");
+    }
+  }, [error, router, showMessage]);
+
+  if (loading) {
+    return <LoadingPage />;
+  }
 
   const followers = user?.followers?.split(":");
-  const following = user?.followers?.split(":");
+  const following = user?.following?.split(":");
 
   return (
     <Layout className="flex flex-col md:flex-row w-full h-full">
@@ -41,7 +58,7 @@ const Profile = () => {
         </div>
         <div className="flex flex-wrap justify-center gap-2 w-full p-2 text-white border-b-2">
           <Button className={infoBtnStyle}>
-            {followers ? `${followers.length} Segidores` : "Nenhum seguidor"}
+            {followers ? `${followers.length} Seguidores` : "Nenhum seguidor"}
           </Button>
           <Button className={infoBtnStyle}>
             {following ? `${following.length} Seguindo` : "Seguindo ninguém"}

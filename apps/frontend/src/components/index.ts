@@ -5,6 +5,7 @@ export * from "./layout/links";
 export * from "./layout/formarea";
 export * from "./layout/navprofile";
 export * from "./layout/layout";
+export * from "./layout/loadingpage";
 
 // Shared
 export * from "./shared/button";
