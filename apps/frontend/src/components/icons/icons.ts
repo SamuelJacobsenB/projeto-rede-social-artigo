@@ -6,6 +6,8 @@ import {
   IoClose,
   IoCheckmarkCircle,
   IoWarning,
+  IoPencil,
+  IoRemove,
 } from "react-icons/io5";
 import {
   FaUserCircle,
@@ -31,6 +33,8 @@ const I = {
   Italic: FaItalic,
   Link: FaLink,
   Paragraph: FaParagraph,
+  Pencil: IoPencil,
+  Remove: IoRemove,
   Search: IoSearch,
   Spinner: LuLoaderCircle,
   Underline: FaUnderline,

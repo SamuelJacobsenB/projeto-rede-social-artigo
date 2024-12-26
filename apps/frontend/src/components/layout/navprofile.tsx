@@ -27,7 +27,7 @@ const NavProfile = () => {
       {user && (
         <div className="flex items-center gap-2 p-2 text-white text-md font-semibold">
           <Link
-            href={"/profile"}
+            href={`/profile/${user.id}`}
             className="flex items-center gap-2 text-white hover:underline"
           >
             <I.UserCircle className="text-3xl" />
