@@ -1,16 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { links } from "@/constants";
-import { useEffect, useState } from "react";
 
 const Links = () => {
   const [path, setPath] = useState("");
 
   useEffect(() => {
-    if (window) {
-      setPath(window.location.pathname);
-    }
+    setPath(window.location.pathname);
   }, []);
 
   return (

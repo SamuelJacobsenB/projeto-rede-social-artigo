@@ -10,6 +10,7 @@ import {
   IoRemove,
 } from "react-icons/io5";
 import {
+  FaUser,
   FaUserCircle,
   FaUserFriends,
   FaChartLine,
@@ -38,6 +39,7 @@ const I = {
   Search: IoSearch,
   Spinner: LuLoaderCircle,
   Underline: FaUnderline,
+  User: FaUser,
   UserCircle: FaUserCircle,
   Warning: IoWarning,
 };

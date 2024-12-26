@@ -1,7 +1,8 @@
 import { Button } from "@/components";
 import { User } from "@/types";
 
-const infoBtnStyle = "bg-primary hover:bg-dark-primary select-none";
+const infoBtnStyle =
+  "bg-primary hover:bg-dark-primary w-10/21 select-none md:w-full";
 
 interface InfoProps {
   user: User;
