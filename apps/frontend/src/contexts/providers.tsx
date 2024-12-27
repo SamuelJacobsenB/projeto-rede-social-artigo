@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
-import { MessageProvider, UserProvider } from ".";
+import { MessageProvider, UserProvider, ModalProvider } from ".";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <MessageProvider>
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <ModalProvider>{children}</ModalProvider>
+        </UserProvider>
       </MessageProvider>
     </>
   );

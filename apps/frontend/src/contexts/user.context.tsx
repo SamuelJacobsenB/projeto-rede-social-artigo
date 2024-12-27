@@ -29,6 +29,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         access_token
       );
 
+      console.log(data);
+
       if (error) {
         localStorage.removeItem("access_token");
         setUser(null);

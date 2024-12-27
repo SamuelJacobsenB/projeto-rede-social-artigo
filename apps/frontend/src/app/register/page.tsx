@@ -8,7 +8,7 @@ import { Button, Input, FileInput, Formarea, Form } from "@/components";
 import { TokenPage } from "./tokenpage";
 
 const Register = () => {
-  const [userCreated, setUserCreated] = useState(true);
+  const [userCreated, setUserCreated] = useState(false);
 
   const [formError, setFormError] = useState("");
   const [name, setName] = useState("");
