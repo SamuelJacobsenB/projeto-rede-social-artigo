@@ -8,6 +8,7 @@ import {
   IoWarning,
   IoPencil,
   IoRemove,
+  IoTrash,
 } from "react-icons/io5";
 import {
   FaUser,
@@ -38,6 +39,7 @@ const I = {
   Remove: IoRemove,
   Search: IoSearch,
   Spinner: LuLoaderCircle,
+  Trash: IoTrash,
   Underline: FaUnderline,
   User: FaUser,
   UserCircle: FaUserCircle,

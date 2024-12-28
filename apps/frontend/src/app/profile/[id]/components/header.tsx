@@ -9,9 +9,9 @@ interface HeaderProps {
 const Header = ({ user }: HeaderProps) => {
   return (
     <div className="flex items-center justify-center gap-12 w-full h-40 border-b-2 md:flex-col md:h-60 md:gap-4">
-      {user.picture ? (
+      {!user.picture ? (
         <Image
-          src={user.picture.toString()}
+          src={"h"}
           alt="User logo"
           width={96}
           height={96}

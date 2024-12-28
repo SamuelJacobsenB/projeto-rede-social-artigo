@@ -34,7 +34,10 @@ const controller = {
         return { data: response.data, error: false };
       })
       .catch((error) => {
-        return { data: null, error: error.response.data.message };
+        return {
+          data: null,
+          error: error.response.data.message,
+        };
       });
   },
   async delete(url: string, access_token?: string) {
