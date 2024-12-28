@@ -1,18 +1,17 @@
-import router from "next/router";
 import { Button, I } from "@/components";
 
 interface MainProps {
-  id: string;
   ifOwnUser: boolean;
   isFollowing: boolean;
   toggleFollowPerson: () => Promise<void>;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Main = ({
-  id,
   ifOwnUser,
   isFollowing,
   toggleFollowPerson,
+  setIsVisible,
 }: MainProps) => {
   return (
     <div className="border-b-2 p-2">
@@ -20,7 +19,7 @@ const Main = ({
         <div className="flex items-center gap-2 w-full">
           <Button
             className="flex justify-center items-center gap-4 bg-blue-700 hover:bg-blue-800 text-white"
-            onClick={() => router.push(`/profile/edit/${id}`)}
+            onClick={() => setIsVisible(true)}
           >
             <I.Pencil />
             Editar Perfil

@@ -16,6 +16,7 @@ export * from "./shared/message";
 export * from "./shared/texteditor";
 export * from "./shared/editorbutton";
 export * from "./shared/loader";
+export * from "./shared/modal";
 
 // Icons
 export * from "./icons/icons";

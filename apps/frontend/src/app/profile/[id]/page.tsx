@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMessage, useUser } from "@/contexts";
 import { useOneUser } from "@/hooks";
 import { controller } from "@/services";
 import { Layout, LoadingPage } from "@/components";
 import { P } from "./components";
+import EditUserModal from "@/components/shared/modal/editusermodal";
 
 const Profile = () => {
   const router = useRouter();
@@ -14,6 +15,8 @@ const Profile = () => {
   const { user: _user } = useUser();
   const { user, loading, error } = useOneUser(id as string);
   const { showMessage } = useMessage();
+
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -59,13 +62,18 @@ const Profile = () => {
 
   return (
     <Layout className="flex flex-col md:flex-row w-full h-full">
+      <EditUserModal
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        user={user!}
+      />
       <main className="md:w-80 md:h-full md:border-r-2">
         <P.Header user={user!} />
         <P.Main
-          id={user!.id}
           ifOwnUser={ifOwnUser}
           isFollowing={isFollowing}
           toggleFollowPerson={toggleFollowPerson}
+          setIsVisible={setIsVisible}
         />
         <P.Description description={user?.description} />
         <P.Info user={user!} followers={followers} following={following} />
