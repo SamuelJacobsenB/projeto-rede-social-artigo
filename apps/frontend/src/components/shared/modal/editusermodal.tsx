@@ -10,12 +10,14 @@ interface EditUserModalProps {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   user: User;
+  refetchUser: () => Promise<void>;
 }
 
 const EditUserModal = ({
   isVisible,
   setIsVisible,
   user,
+  refetchUser,
 }: EditUserModalProps) => {
   const { showMessage } = useMessage();
 
@@ -46,6 +48,7 @@ const EditUserModal = ({
     }
 
     showMessage("Perfil editado com sucesso", "success");
+    await refetchUser();
     setIsVisible(false);
   };
 
@@ -83,7 +86,7 @@ const EditUserModal = ({
           className="text-3xl"
           onClick={() => {
             setIsVisible(false);
-            setDescription("");
+            setDescription(user.picture ?? "");
             setPicture(null);
             setPreviewUrl(user.picture ?? null);
           }}

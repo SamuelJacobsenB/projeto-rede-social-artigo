@@ -12,7 +12,7 @@ const Profile = () => {
   const router = useRouter();
   const { id } = useParams();
   const { user: _user } = useUser();
-  const { user, loading, error } = useOneUser(id as string);
+  const { user, loading, error, findUser } = useOneUser(id as string);
   const { showMessage } = useMessage();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -70,6 +70,7 @@ const Profile = () => {
         isVisible={isVisible}
         setIsVisible={setIsVisible}
         user={user!}
+        refetchUser={findUser}
       />
       <main className="md:w-80 md:h-full md:border-r-2">
         <P.Header user={user!} />

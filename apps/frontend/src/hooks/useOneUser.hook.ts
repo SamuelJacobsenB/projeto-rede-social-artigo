@@ -31,7 +31,7 @@ const useOneUser = (id: string) => {
     findUser();
   }, [findUser]);
 
-  return { user, loading, error };
+  return { user, loading, error, findUser };
 };
 
 export { useOneUser };
