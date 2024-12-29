@@ -3,6 +3,7 @@
 import { useUser } from "@/contexts";
 import Link from "next/link";
 import { I } from "../icons/icons";
+import { ProfileCircle } from "../shared/profilecircle";
 
 const NavProfile = () => {
   const { user } = useUser();
@@ -30,7 +31,11 @@ const NavProfile = () => {
             href={`/profile/${user.id}`}
             className="flex items-center gap-2 text-white hover:underline"
           >
-            <I.UserCircle className="text-3xl" />
+            {user.picture ? (
+              <ProfileCircle picture={user.picture} size={32} />
+            ) : (
+              <I.UserCircle className="size-8" />
+            )}
             {user.name}
           </Link>
         </div>

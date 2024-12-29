@@ -17,6 +17,7 @@ export * from "./shared/texteditor";
 export * from "./shared/editorbutton";
 export * from "./shared/loader";
 export * from "./shared/modal";
+export * from "./shared/profilecircle";
 
 // Icons
 export * from "./icons/icons";

@@ -5,9 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useMessage, useUser } from "@/contexts";
 import { useOneUser } from "@/hooks";
 import { controller } from "@/services";
-import { Layout, LoadingPage } from "@/components";
+import { Layout, LoadingPage, EditUserModal } from "@/components";
 import { P } from "./components";
-import EditUserModal from "@/components/shared/modal/editusermodal";
 
 const Profile = () => {
   const router = useRouter();
@@ -27,6 +26,11 @@ const Profile = () => {
 
   if (loading) {
     return <LoadingPage />;
+  }
+
+  if (!user) {
+    showMessage("Este perfil não foi encontrado", "error");
+    router.push("/");
   }
 
   const ifOwnUser = user!.id === _user?.id;

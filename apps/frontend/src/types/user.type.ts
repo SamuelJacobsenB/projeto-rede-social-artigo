@@ -8,7 +8,7 @@ export interface User {
   views: number;
   hearts: number;
   description: string | null;
-  picture?: File;
+  picture: string | null;
   role: string;
   verified: boolean;
   token_verifier: string;

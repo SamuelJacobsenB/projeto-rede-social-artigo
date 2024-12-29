@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { useMessage } from "@/contexts";
 import { controller } from "@/services";
-import { TemplateModal, I, Button, Input } from "@/components";
+import { TemplateModal, I, Button, Input, ProfileCircle } from "@/components";
 import { User } from "@/types";
 
 interface EditUserModalProps {
@@ -22,8 +21,8 @@ const EditUserModal = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState<File>();
-  const [previewUrl, setPreviewUrl] = useState<string>();
+  const [picture, setPicture] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const onUpdate = async () => {
     const access_token = localStorage.getItem("access_token");
@@ -36,47 +35,38 @@ const EditUserModal = ({
     const formData = new FormData();
     formData.append("description", description);
     if (picture) {
-      formData.append("picture", picture);
+      formData.append("picture", picture as File);
     }
 
-    const { data, error } = await controller.patch(
-      "/users",
-      formData,
-      access_token
-    );
+    const { error } = await controller.patch("/users", formData, access_token);
 
     if (error) {
       showMessage(error, "error");
       return;
     }
 
-    console.log(data);
-
     showMessage("Perfil editado com sucesso", "success");
     setIsVisible(false);
-    return;
   };
 
   const handleFileChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const file = evt.target.files ? evt.target.files[0] : undefined;
+    const file = evt.target.files ? evt.target.files[0] : null;
     setPicture(file);
 
     if (file) {
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
     } else {
-      setPreviewUrl(undefined);
+      setPreviewUrl(null);
     }
   };
 
   useEffect(() => {
     if (user) {
       setDescription(user.description ? user.description : "");
-      setPicture(user.picture);
 
       if (user.picture) {
-        const url = URL.createObjectURL(user.picture as File);
-        setPreviewUrl(url);
+        setPreviewUrl(user.picture);
       }
     }
   }, [user]);
@@ -89,24 +79,24 @@ const EditUserModal = ({
     <TemplateModal className="gap-2">
       <div className="flex items-center justify-between p-2 border-b-2">
         <h1 className="text-2xl">Editar perfil</h1>
-        <button className="text-3xl" onClick={() => setIsVisible(false)}>
+        <button
+          className="text-3xl"
+          onClick={() => {
+            setIsVisible(false);
+            setDescription("");
+            setPicture(null);
+            setPreviewUrl(user.picture ?? null);
+          }}
+        >
           <I.Close />
         </button>
       </div>
       <div className="flex flex-col justify-center items-center gap-2 w-full p-2 border-b-2">
         <div className="flex items-center flex-col gap-4 w-full p-2 border-b-2">
-          {picture ? (
-            <div className="flex justify-center items-center h-40 w-40 rounded-full border-2 overflow-hidden">
-              <Image
-                src={previewUrl as string}
-                alt="Foto de perfil"
-                width={160}
-                height={160}
-              />
-            </div>
-          ) : (
-            <I.UserCircle className="size-40" />
+          {(user.picture || picture) && (
+            <ProfileCircle picture={previewUrl as string} size={160} />
           )}
+          {!user.picture && !picture && <I.UserCircle className="size-40" />}
           <div className="flex justify-center gap-2 w-full">
             <input
               ref={inputRef}
@@ -129,7 +119,7 @@ const EditUserModal = ({
             {picture && (
               <Button
                 className="flex justify-center items-center gap-2 bg-red-700 text-white text-lg max-w-44 px-2 hover:bg-red-800"
-                onClick={() => setPicture(undefined)}
+                onClick={() => setPicture(null)}
               >
                 <I.Trash />
                 Deletar perfil
@@ -159,4 +149,4 @@ const EditUserModal = ({
   );
 };
 
-export default EditUserModal;
+export { EditUserModal };

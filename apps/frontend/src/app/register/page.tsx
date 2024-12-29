@@ -72,6 +72,7 @@ const Register = () => {
               setValue={setName}
               label="Nome"
               placeholder="Seu nome"
+              maxLength={20}
               required
             />
             <Input
