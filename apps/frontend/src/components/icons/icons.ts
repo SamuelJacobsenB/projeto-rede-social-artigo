@@ -9,6 +9,7 @@ import {
   IoPencil,
   IoRemove,
   IoTrash,
+  IoCalendar,
 } from "react-icons/io5";
 import {
   FaUser,
@@ -20,6 +21,9 @@ import {
   FaUnderline,
   FaItalic,
   FaLink,
+  FaHeart,
+  FaRegHeart,
+  FaRegEye,
 } from "react-icons/fa";
 import { LuLoaderCircle } from "react-icons/lu";
 
@@ -27,10 +31,14 @@ const I = {
   Add: IoAdd,
   AddCircle: IoAddCircle,
   Bold: FaBold,
+  Calendar: IoCalendar,
   Chart: FaChartLine,
   Check: IoCheckmarkCircle,
   Close: IoClose,
+  Eye: FaRegEye,
   Friends: FaUserFriends,
+  Heart: FaHeart,
+  HeartEmpty: FaRegHeart,
   Home: IoHome,
   Italic: FaItalic,
   Link: FaLink,

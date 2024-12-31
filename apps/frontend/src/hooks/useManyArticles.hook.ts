@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { controller } from "@/services";
 import { Article } from "@/types";
 
-const useManyArticles = () => {
+const useManyArticles = (authorId?: string) => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -13,7 +13,9 @@ const useManyArticles = () => {
 
   const fetchArticles = useCallback(async () => {
     try {
-      const { data, error } = await controller.get(`/articles/${page}`);
+      const url = `/articles/${authorId ? `${authorId}/${page}` : page}`;
+
+      const { data, error } = await controller.get(url);
 
       if (error) {
         setError(error);
@@ -21,7 +23,7 @@ const useManyArticles = () => {
         return;
       }
 
-      if (data.length === 0) {
+      if (data.length < 10) {
         setHasMore(false);
       } else {
         setArticles([...articles, ...data]);
@@ -32,13 +34,13 @@ const useManyArticles = () => {
     } finally {
       setLoading(false);
     }
-  }, [articles, page]);
+  }, [authorId, articles, page]);
 
   useEffect(() => {
     fetchArticles();
   }, [fetchArticles]);
 
-  return { articles, hasMore, page, loading, error, fetchArticles };
+  return { articles, hasMore, loading, error, fetchArticles };
 };
 
 export { useManyArticles };

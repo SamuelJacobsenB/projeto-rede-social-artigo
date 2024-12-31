@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useMessage } from "@/contexts";
 import Image from "next/image";
+import { useMessage } from "@/contexts";
 import { controller } from "@/services";
 import { Button, Input, Formarea, Form, TextEditor } from "@/components";
 import { EditorState } from "draft-js";
+import { stateToHTML } from "draft-js-export-html";
 
 const Create = () => {
   const router = useRouter();
@@ -19,10 +20,29 @@ const Create = () => {
   const onSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    const { error } = await controller.post("/articles", {
-      title,
-      content,
-    });
+    const access_token = localStorage.getItem("access_token");
+
+    if (!access_token) {
+      setFormError("Você deve estar logado para fazer esta ação");
+      return;
+    }
+
+    const currentContent = content.getCurrentContent();
+    const htmlContent = stateToHTML(currentContent).toString();
+
+    if (!htmlContent) {
+      setFormError("O conteúdo do artigo é obrigatório");
+      return;
+    }
+
+    const { error } = await controller.post(
+      "/articles",
+      {
+        title,
+        content: htmlContent,
+      },
+      access_token
+    );
 
     if (error) {
       setFormError(error);
@@ -50,6 +70,7 @@ const Create = () => {
           label="Título"
           placeholder="Título do artigo"
           required
+          maxLength={30}
         />
         <TextEditor
           label="Conteúdo"
