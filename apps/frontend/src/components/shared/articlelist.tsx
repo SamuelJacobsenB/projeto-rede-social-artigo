@@ -1,29 +1,36 @@
-"use client";
+import { ArticleCard, InfiniteScroll } from "..";
+import { Article } from "@/types";
 
-import { useManyArticles } from "@/hooks";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Loader, LoadingPage } from "..";
+interface ArticlesListProps {
+  articles: Article[];
+  fetchArticles: () => Promise<void>;
+  loading: boolean;
+  hasMore: boolean;
+  className?: string;
+}
 
-const ArticlesList = () => {
-  const { articles, hasMore, loading, fetchArticles } = useManyArticles();
-
-  if (loading) {
-    return <LoadingPage />;
-  }
-
+const ArticlesList = ({
+  articles,
+  fetchArticles,
+  loading,
+  hasMore,
+  className,
+}: ArticlesListProps) => {
   return (
     <InfiniteScroll
-      dataLength={articles.length}
-      next={() => fetchArticles()}
+      fetch={async () => await fetchArticles()}
+      loading={loading}
       hasMore={hasMore}
-      loader={<Loader />}
     >
-      <div className="flex flex-col justify-center gap-4 w-full h-full">
-        {articles.map((article, index) => (
-          <div key={index} className="article">
-            <h2>{article.title}</h2>
-            <p>{article.content}</p>
-          </div>
+      <div
+        className={`flex flex-col items-center gap-4 w-full h-full ${className}`}
+      >
+        {articles.map((article) => (
+          <ArticleCard
+            article={article}
+            key={article.id}
+            className="max-w-5xl"
+          />
         ))}
       </div>
     </InfiniteScroll>

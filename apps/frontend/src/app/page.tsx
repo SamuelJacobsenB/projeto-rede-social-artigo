@@ -1,12 +1,20 @@
-import { Layout } from "@/components";
+"use client";
+
+import { useManyArticles } from "@/hooks";
+import { ArticlesList, Layout } from "@/components";
 
 const Home = () => {
+  const { articles, loading, fetchArticles, hasMore } = useManyArticles();
+
   return (
-    <Layout>
-      <h1 className="text-8xl">hello</h1>
-      <h1 className="text-8xl">hello</h1>
-      <h1 className="text-8xl">hello</h1>
-      <h1 className="text-8xl">hello</h1>
+    <Layout className="flex items-center justify-center">
+      <ArticlesList
+        articles={articles}
+        fetchArticles={fetchArticles}
+        loading={loading}
+        hasMore={hasMore}
+        className="p-2"
+      />
     </Layout>
   );
 };

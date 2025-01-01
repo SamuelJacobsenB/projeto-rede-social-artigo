@@ -20,6 +20,7 @@ export * from "./shared/modal";
 export * from "./shared/profilecircle";
 export * from "./shared/card";
 export * from "./shared/articlelist";
+export * from "./shared/infinitescroll";
 
 // Icons
 export * from "./icons/icons";

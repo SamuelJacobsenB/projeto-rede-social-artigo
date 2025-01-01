@@ -13,6 +13,9 @@ const useManyArticles = (authorId?: string) => {
 
   const fetchArticles = useCallback(async () => {
     try {
+      setLoading(true);
+      setError(false);
+
       const url = `/articles/${authorId ? `${authorId}/${page}` : page}`;
 
       const { data, error } = await controller.get(url);
@@ -23,18 +26,20 @@ const useManyArticles = (authorId?: string) => {
         return;
       }
 
-      if (data.length < 10) {
-        setHasMore(false);
-      } else {
+      if (hasMore) {
         setArticles([...articles, ...data]);
         setPage(page + 1);
+      }
+
+      if (data.length < 10) {
+        setHasMore(false);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Parece que houve um erro");
     } finally {
       setLoading(false);
     }
-  }, [authorId, articles, page]);
+  }, [authorId, articles, page, hasMore]);
 
   useEffect(() => {
     fetchArticles();
