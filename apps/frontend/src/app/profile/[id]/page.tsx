@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMessage, useUser } from "@/contexts";
 import { useOneUser } from "@/hooks";
-import { controller } from "@/services";
+import { toggleFollow } from "@/functions";
 import { Layout, LoadingPage, EditUserModal } from "@/components";
 import { P } from "./components";
 
@@ -45,16 +45,7 @@ const Profile = () => {
   const toggleFollowPerson = async () => {
     const access_token = localStorage.getItem("access_token");
 
-    if (!_user || !access_token) {
-      showMessage("Você deve estar logado para seguir", "error");
-      return;
-    }
-
-    const { error } = await controller.post(
-      "/users/follow",
-      { id },
-      access_token
-    );
+    const { error } = await toggleFollow(id as string, _user, access_token);
 
     if (error) {
       showMessage(error as string, "error");

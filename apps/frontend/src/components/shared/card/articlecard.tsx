@@ -31,10 +31,10 @@ const ArticleCard = ({ article, onClick, className }: ArticleCardProps) => {
           <I.Calendar /> {date}
         </p>
         <p className={infoStyle}>
-          <I.Heart /> {article.hearts ?? 0}
+          <I.Heart /> {article.hearts?.split(":").length ?? 0}
         </p>
         <p className={infoStyle}>
-          <I.Eye /> {article.views ?? 0}
+          <I.Eye /> {article.views?.split(":").length ?? 0}
         </p>
       </div>
     </div>

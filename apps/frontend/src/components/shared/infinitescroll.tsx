@@ -21,8 +21,8 @@ const InfiniteScroll = ({
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.offsetHeight - 500 &&
+        window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - 500 &&
         hasMore
       ) {
         fetch();
