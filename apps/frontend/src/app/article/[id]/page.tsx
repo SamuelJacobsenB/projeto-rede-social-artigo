@@ -15,7 +15,7 @@ const Article = () => {
   const { id } = useParams();
   const { showMessage } = useMessage();
   const { user } = useUser();
-  const { article, loading, error } = useOneArticle(id as string);
+  const { article, loading, error, fetchArticle } = useOneArticle(id as string);
 
   const handleAddView = useCallback(async () => {
     const access_token = localStorage.getItem("access_token");
@@ -62,7 +62,29 @@ const Article = () => {
       return;
     }
 
-    router.refresh();
+    await fetchArticle();
+  };
+
+  const toggleLikeArticle = async () => {
+    const access_token = localStorage.getItem("access_token");
+
+    if (!access_token || !user) {
+      showMessage("Você deve estar logado para curtir", "error");
+      return;
+    }
+
+    const { error } = await controller.patch(
+      `/articles/heart`,
+      { id },
+      access_token
+    );
+
+    if (error) {
+      showMessage(error as string, "error");
+      return;
+    }
+
+    await fetchArticle();
   };
 
   return (
@@ -111,8 +133,18 @@ const Article = () => {
           </div>
           <div>
             <p className={`text-red-700 ${infoItemStyle}`}>
-              {ifUserLiked && <I.Heart className="cursor-pointer" />}
-              {!ifUserLiked && <I.HeartEmpty className="cursor-pointer" />}
+              {ifUserLiked && (
+                <I.Heart
+                  className="cursor-pointer"
+                  onClick={async () => await toggleLikeArticle()}
+                />
+              )}
+              {!ifUserLiked && (
+                <I.HeartEmpty
+                  className="cursor-pointer"
+                  onClick={async () => await toggleLikeArticle()}
+                />
+              )}
               {article.hearts?.split(":").length ?? 0}
             </p>
           </div>
