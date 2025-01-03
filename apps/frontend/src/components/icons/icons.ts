@@ -10,6 +10,7 @@ import {
   IoRemove,
   IoTrash,
   IoCalendar,
+  IoPersonAddOutline,
 } from "react-icons/io5";
 import {
   FaUser,
@@ -26,10 +27,14 @@ import {
   FaRegEye,
 } from "react-icons/fa";
 import { LuLoaderCircle } from "react-icons/lu";
+import { GrArticle } from "react-icons/gr";
+import { MdPersonAdd } from "react-icons/md";
 
 const I = {
   Add: IoAdd,
   AddCircle: IoAddCircle,
+  AddPerson: MdPersonAdd,
+  Article: GrArticle,
   Bold: FaBold,
   Calendar: IoCalendar,
   Chart: FaChartLine,

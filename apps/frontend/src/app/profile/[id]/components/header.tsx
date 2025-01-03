@@ -7,7 +7,7 @@ interface HeaderProps {
 
 const Header = ({ user }: HeaderProps) => {
   return (
-    <div className="flex items-center justify-center gap-12 w-full h-40 border-b-2 md:flex-col md:h-60 md:gap-4">
+    <div className="flex items-center justify-center gap-12 w-full h-40 py-2 border-b-2 md:flex-col md:h-60 md:gap-4 md:py-4">
       {user.picture ? (
         <ProfileCircle
           picture={user.picture}

@@ -56,24 +56,29 @@ const Profile = () => {
   };
 
   return (
-    <Layout className="flex flex-col md:flex-row w-full h-full">
+    <Layout className="flex justify-center w-full h-full">
       <EditUserModal
         isVisible={isVisible}
         setIsVisible={setIsVisible}
         user={user!}
         refetchUser={findUser}
       />
-      <main className="md:w-80 md:h-full md:border-r-2">
-        <P.Header user={user!} />
-        <P.Main
-          ifOwnUser={ifOwnUser}
-          isFollowing={isFollowing}
-          toggleFollowPerson={toggleFollowPerson}
-          setIsVisible={setIsVisible}
-        />
-        <P.Description description={user?.description} />
-        <P.Info user={user!} followers={followers} following={following} />
-      </main>
+      <div className="flex flex-col  w-full md:flex-row md:h-full max-w-5xl">
+        <main className="h-min md:min-w-96 md:w-1/2 md:h-full md:border-x-2">
+          <P.Header user={user!} />
+          <P.Main
+            ifOwnUser={ifOwnUser}
+            isFollowing={isFollowing}
+            toggleFollowPerson={toggleFollowPerson}
+            setIsVisible={setIsVisible}
+          />
+          <P.Description description={user?.description} />
+          <P.Info user={user!} followers={followers} following={following} />
+        </main>
+        <div className="flex w-full md:border-x-2">
+          <P.Tabs user={user!} />
+        </div>
+      </div>
     </Layout>
   );
 };
