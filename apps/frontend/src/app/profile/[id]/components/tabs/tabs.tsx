@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { User } from "@/types";
 import { I } from "@/components";
+import { Articles } from ".";
 
 interface TabsProps {
   user: User;
@@ -25,7 +26,7 @@ const Tabs = ({ user }: TabsProps) => {
   };
 
   return (
-    <>
+    <div className="flex flex-col w-full p-2">
       <div className="flex w-full border-b-2 h-fit">
         <button
           onClick={() => {
@@ -58,7 +59,14 @@ const Tabs = ({ user }: TabsProps) => {
           <I.AddPerson />
         </button>
       </div>
-    </>
+      {followersTab && (
+        <div className="flex flex-col gap-4">{/* Followers List */}</div>
+      )}
+      {articlesTab && <Articles userId={user.id} />}
+      {followingTab && (
+        <div className="flex flex-col gap-4">{/* Following List */}</div>
+      )}
+    </div>
   );
 };
 

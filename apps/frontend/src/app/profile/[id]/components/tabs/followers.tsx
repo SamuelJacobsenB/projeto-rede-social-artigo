@@ -1,7 +1,7 @@
 import React from "react";
 
-const Friends = () => {
+const Followers = () => {
   return <div>Friends</div>;
 };
 
-export { Friends };
+export { Followers };

@@ -18,7 +18,7 @@ const useManyArticles = (authorId?: string) => {
         setError(false);
 
         const url = `/articles/${
-          authorId ? `${authorId}/${pageToFetch}` : pageToFetch
+          authorId ? `author/${authorId}/${pageToFetch}` : pageToFetch
         }`;
 
         const { data, error } = await controller.get(url);
@@ -29,7 +29,15 @@ const useManyArticles = (authorId?: string) => {
         }
 
         if (hasMore) {
-          setArticles((prevArticles) => [...prevArticles, ...data]);
+          setArticles((prevArticles) => {
+            const newArticles = data.filter((article: Article) => {
+              return prevArticles.some(
+                (prevArticle) => prevArticle.id !== article.id
+              );
+            });
+
+            return [...prevArticles, ...newArticles];
+          });
           setPage(pageToFetch + 1);
         }
 
