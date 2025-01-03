@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ArticleCard, InfiniteScroll } from "..";
+import { ArticleCard, InfiniteScroll } from "../..";
 import { Article } from "@/types";
 
 interface ArticlesListProps {

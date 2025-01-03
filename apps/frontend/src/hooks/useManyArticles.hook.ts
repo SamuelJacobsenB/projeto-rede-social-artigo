@@ -31,8 +31,8 @@ const useManyArticles = (authorId?: string) => {
         if (hasMore) {
           setArticles((prevArticles) => {
             const newArticles = data.filter((article: Article) => {
-              return prevArticles.some(
-                (prevArticle) => prevArticle.id !== article.id
+              return !prevArticles.some(
+                (prevArticle) => prevArticle.id === article.id
               );
             });
 

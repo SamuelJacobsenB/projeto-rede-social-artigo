@@ -49,7 +49,7 @@ const useManyUsers = (
 
           setUsers((prevUsers) => {
             const newUsers = data.filter((user: User) => {
-              return prevUsers.some((prevUser) => prevUser.id !== user.id);
+              return !prevUsers.some((prevUser) => prevUser.id === user.id);
             });
 
             return [...prevUsers, ...newUsers];
@@ -94,7 +94,7 @@ const useManyUsers = (
 
           setUsers((prevUsers) => {
             const newUsers = data.filter((user) => {
-              return prevUsers.some((prevUser) => prevUser.id !== user.id);
+              return !prevUsers.some((prevUser) => prevUser.id === user.id);
             });
 
             return [...prevUsers, ...newUsers];

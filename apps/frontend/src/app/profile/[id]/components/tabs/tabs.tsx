@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { User } from "@/types";
 import { I } from "@/components";
-import { Articles } from ".";
+import { Articles, Followers, Following } from ".";
 
 interface TabsProps {
   user: User;
@@ -59,13 +59,9 @@ const Tabs = ({ user }: TabsProps) => {
           <I.AddPerson />
         </button>
       </div>
-      {followersTab && (
-        <div className="flex flex-col gap-4">{/* Followers List */}</div>
-      )}
+      {followersTab && <Followers followers={user.followers} />}
       {articlesTab && <Articles userId={user.id} />}
-      {followingTab && (
-        <div className="flex flex-col gap-4">{/* Following List */}</div>
-      )}
+      {followingTab && <Following following={user.following} />}
     </div>
   );
 };
