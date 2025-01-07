@@ -11,8 +11,8 @@ interface TabsProps {
 
 const btnStyle =
   "flex flex-1 justify-center p-4 items-center text-3xl hover:border-b-4";
-
 const selectedBtnStyle = "text-primary border-b-4 border-primary";
+const anyInfoTitleStyle = "text-xl text-center w-full p-2";
 
 const Tabs = ({ user }: TabsProps) => {
   const [followingTab, setFollowingTab] = useState(false);
@@ -59,9 +59,21 @@ const Tabs = ({ user }: TabsProps) => {
           <I.AddPerson />
         </button>
       </div>
-      {followersTab && <Followers followers={user.followers} />}
+      {followersTab ? (
+        user.followers ? (
+          <Followers followers={user.followers} />
+        ) : (
+          <h2 className={anyInfoTitleStyle}>Nenhum seguidor</h2>
+        )
+      ) : null}
       {articlesTab && <Articles userId={user.id} />}
-      {followingTab && <Following following={user.following} />}
+      {followingTab ? (
+        user.following ? (
+          <Following following={user.following} />
+        ) : (
+          <h2 className={anyInfoTitleStyle}>Seguindo a ninguém</h2>
+        )
+      ) : null}
     </div>
   );
 };

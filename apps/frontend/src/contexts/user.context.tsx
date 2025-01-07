@@ -13,6 +13,7 @@ import { User } from "@/types";
 export interface UserContextProps {
   user: User | null;
   findUser: () => Promise<void>;
+  logout: () => void;
 }
 
 const UserContext = createContext<UserContextProps>({} as UserContextProps);
@@ -39,12 +40,17 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
+  const logout = useCallback(() => {
+    localStorage.removeItem("access_token");
+    setUser(null);
+  }, []);
+
   useEffect(() => {
     findUser();
   }, [findUser]);
 
   return (
-    <UserContext.Provider value={{ user, findUser }}>
+    <UserContext.Provider value={{ user, findUser, logout }}>
       {children}
     </UserContext.Provider>
   );

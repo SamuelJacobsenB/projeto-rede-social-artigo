@@ -7,6 +7,7 @@ import { serializeDate, toggleFollow } from "@/functions";
 import { I, Layout, LoadingPage, ProfileCircle } from "@/components";
 import { useCallback, useEffect } from "react";
 import { controller } from "@/services";
+import { debounce } from "lodash";
 
 const infoItemStyle = "flex items-center gap-2 text-lg";
 
@@ -52,20 +53,24 @@ const Article = () => {
   const ifIsFollowing =
     author.followers && user ? author.followers.includes(user.id) : false;
 
-  const toggleFollowAuthor = async () => {
+  const toggleFollowAuthor = async (follow: boolean) => {
     const access_token = localStorage.getItem("access_token");
 
-    const { error } = await toggleFollow(author.id, user, access_token);
+    const response = await toggleFollow(
+      author.id,
+      follow,
+      user,
+      access_token,
+      fetchArticle
+    );
 
-    if (error) {
+    if (response?.error) {
       showMessage(error as string, "error");
       return;
     }
-
-    await fetchArticle();
   };
 
-  const toggleLikeArticle = async () => {
+  const toggleLikeArticle = debounce(async (add: boolean) => {
     const access_token = localStorage.getItem("access_token");
 
     if (!access_token || !user) {
@@ -73,11 +78,9 @@ const Article = () => {
       return;
     }
 
-    const { error } = await controller.patch(
-      `/articles/heart`,
-      { id },
-      access_token
-    );
+    const url = `/articles/${add ? "add" : "remove"}/heart`;
+
+    const { error } = await controller.patch(url, { id }, access_token);
 
     if (error) {
       showMessage(error as string, "error");
@@ -85,7 +88,7 @@ const Article = () => {
     }
 
     await fetchArticle();
-  };
+  }, 500);
 
   return (
     <Layout className="flex justify-center p-4">
@@ -107,7 +110,9 @@ const Article = () => {
             <>
               <p>-</p>
               <button
-                onClick={async () => await toggleFollowAuthor()}
+                onClick={async () =>
+                  await toggleFollowAuthor(ifIsFollowing ? false : true)
+                }
                 className="text-blue-700 hover:underline"
               >
                 {ifIsFollowing && "Deixar de seguir"}
@@ -136,13 +141,13 @@ const Article = () => {
               {ifUserLiked && (
                 <I.Heart
                   className="cursor-pointer"
-                  onClick={async () => await toggleLikeArticle()}
+                  onClick={async () => await toggleLikeArticle(false)}
                 />
               )}
               {!ifUserLiked && (
                 <I.HeartEmpty
                   className="cursor-pointer"
-                  onClick={async () => await toggleLikeArticle()}
+                  onClick={async () => await toggleLikeArticle(true)}
                 />
               )}
               {article.hearts?.split(":").length ?? 0}

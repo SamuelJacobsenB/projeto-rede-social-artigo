@@ -11,7 +11,7 @@ const Articles = ({ userId }: ArticlesProps) => {
   const { articles, loading, page, hasMore, fetchArticles } =
     useManyArticles(userId);
 
-  if (!loading && !articles) {
+  if (!articles || (articles.length === 0 && !loading)) {
     return (
       <h2 className="text-xl text-center w-full p-2">
         Nenhum artigo cadastrado

@@ -11,7 +11,7 @@ import { P } from "./components";
 const Profile = () => {
   const router = useRouter();
   const { id } = useParams();
-  const { user: _user } = useUser();
+  const { user: _user, findUser: getUser, logout } = useUser();
   const { user, loading, error, findUser } = useOneUser(id as string);
   const { showMessage } = useMessage();
 
@@ -42,17 +42,31 @@ const Profile = () => {
     ? user.followers.split(":").includes(_user?.id as string)
     : false;
 
-  const toggleFollowPerson = async () => {
+  const toggleFollowPerson = async (follow: boolean) => {
     const access_token = localStorage.getItem("access_token");
 
-    const { error } = await toggleFollow(id as string, _user, access_token);
-
-    if (error) {
-      showMessage(error as string, "error");
+    if (!access_token) {
+      showMessage("Você precisa estar logado", "error");
       return;
     }
 
-    router.refresh();
+    const refetchFn = async () => {
+      await findUser();
+      await getUser();
+    };
+
+    const response = await toggleFollow(
+      id as string,
+      follow,
+      _user,
+      access_token,
+      refetchFn
+    );
+
+    if (response?.error) {
+      showMessage(error as string, "error");
+      return;
+    }
   };
 
   return (
@@ -70,6 +84,7 @@ const Profile = () => {
             ifOwnUser={ifOwnUser}
             isFollowing={isFollowing}
             toggleFollowPerson={toggleFollowPerson}
+            logout={logout}
             setIsVisible={setIsVisible}
           />
           <P.Description description={user?.description} />

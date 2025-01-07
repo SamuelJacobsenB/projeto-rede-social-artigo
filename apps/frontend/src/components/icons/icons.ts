@@ -10,7 +10,7 @@ import {
   IoRemove,
   IoTrash,
   IoCalendar,
-  IoPersonAddOutline,
+  IoLogOut,
 } from "react-icons/io5";
 import {
   FaUser,
@@ -47,6 +47,7 @@ const I = {
   Home: IoHome,
   Italic: FaItalic,
   Link: FaLink,
+  Logout: IoLogOut,
   Paragraph: FaParagraph,
   Pencil: IoPencil,
   Remove: IoRemove,
